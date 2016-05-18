@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+//var controller = require('controller')
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -15,6 +16,11 @@ app.get('/', function(request, response) {
 
 app.get('/ping', function(request, response) {
   response.send('PONG');
+});
+
+app.get('/:id', function(request, response) {
+  var id = request.params.id
+  response.send(id);
 });
 
 app.listen(app.get('port'), function() {
