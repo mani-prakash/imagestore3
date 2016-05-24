@@ -42,7 +42,7 @@ app.get('/:id', function (request, response) {
   })
 });
 
-app.post('/save', function (req, res) {
+app.post('/save', express.bodyParser({limit: '50mb'}), function (req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   //Access-Control-Allow-Origin
   var user = req.body
