@@ -18,16 +18,20 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
+  response.setHeader("Access-Control-Allow-Origin", "*");
   response.render('pages/index');
 });
 
 app.get('/ping', function(request, response) {
+  response.setHeader("Access-Control-Allow-Origin", "*");
   response.send('PONG');
 });
 
 app.get('/:id', function (request, response) {
+  response.setHeader("Access-Control-Allow-Origin", "*");
   var id = request.params.id
   return controller.getUser(id, function (err, userData) {
+    response.setHeader("Access-Control-Allow-Origin", "*");
     if (err) {
       return response.send('Error ' + JSON.stringify(err))
     }
@@ -36,6 +40,7 @@ app.get('/:id', function (request, response) {
 });
 
 app.post('/save', function (req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   var user = req.body
   return controller.saveUser(user, function (err, userData) {
     if (err) {
