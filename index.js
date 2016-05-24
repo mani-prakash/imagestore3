@@ -1,8 +1,15 @@
 var express = require('express');
 var app = express();
-//var controller = require('controller')
+var controller = require('./controller')
+var bodyParser = require('body-parser')
 
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 7000));
+
+app.use(bodyParser.json());
+//app.configure(function(){
+//  app.use(express.bodyParser());
+//  app.use(app.router);
+//});
 
 app.use(express.static(__dirname + '/public'));
 
@@ -18,9 +25,24 @@ app.get('/ping', function(request, response) {
   response.send('PONG');
 });
 
-app.get('/:id', function(request, response) {
+app.get('/:id', function (request, response) {
   var id = request.params.id
-  response.send(id);
+  return controller.getUser(id, function (err, userData) {
+    if (err) {
+      return response.send('Error ' + JSON.stringify(err))
+    }
+    return response.send(userData);
+  })
+});
+
+app.post('/save', function (req, res) {
+  var user = req.body
+  return controller.saveUser(user, function (err, userData) {
+    if (err) {
+      return res.send('Error ' + JSON.stringify(err))
+    }
+    return res.send(userData);
+  })
 });
 
 app.listen(app.get('port'), function() {
