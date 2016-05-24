@@ -5,7 +5,7 @@ var bodyParser = require('body-parser')
 var cors = require('cors');
 app.set('port', (process.env.PORT || 7000));
 
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 // use it before all route definitions
