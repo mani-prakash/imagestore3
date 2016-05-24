@@ -22,7 +22,8 @@
   "keywords": [
     "node",
     "heroku",
-    "express"
+    "express",
+    "cors"
   ],
   "license": "MIT"
 }
